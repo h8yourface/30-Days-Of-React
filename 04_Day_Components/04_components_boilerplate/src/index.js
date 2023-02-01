@@ -3,6 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import asabenehImage from './images/asabeneh.jpg'
 
+import cssLogo from './images/css_logo.png'
+import reactLogo from './images/react_logo.png'
+import jsLogo from './images/js_logo.png'
+import htmlLogo from './images/html_logo.png'
+
+
 const hexaColor = () => {
   let str = '0123456789abcdef'
   let color = ''
@@ -18,13 +24,14 @@ const HexaColor = () => {
   const styles = {
     height: '100px',
     display: 'flex',
+    backgroundColor: bgColor,
+    color: 'white',
     'justify-content': 'center',
     'align-items': 'center',
     fontFamily: 'Montserrat',
     margin: '2px auto',
     borderRadius: '5px',
-    width: '75%',
-    border: '2px solid black',
+    width: '100%',
   }
   return (
     <div style={styles}>
@@ -49,7 +56,7 @@ const Header = () => (
 // User Card Component
 const UserCard = () => (
   <div className='user-card'>
-    <img src={asabenehImage} alt='asabeneh image' />
+    <img src={asabenehImage} alt='asabeneh' />
     <h2>Asabeneh Yetayeh</h2>
   </div>
 )
@@ -87,6 +94,17 @@ const Main = () => (
   </main>
 )
 
+const ColorGenerator = () => (
+  <div>
+    <HexaColor />
+    <HexaColor />
+    <HexaColor />
+    <HexaColor />
+    <HexaColor />
+    <HexaColor />
+  </div>
+)
+
 // Footer Component
 const Footer = () => (
   <footer>
@@ -96,12 +114,42 @@ const Footer = () => (
   </footer>
 )
 
+const Logos = () => (
+  <div>
+    <h4>Front End Technologies</h4>
+    <div className='logos'>
+      <img className='logo-img' src={htmlLogo} alt="html logo" />
+      <img className='logo-img' src={cssLogo} alt="css logo" />
+      <img className='logo-img' src={jsLogo} alt="js logo" />
+      <img className='logo-img' src={reactLogo} alt="react logo" />
+    </div>
+  </div>
+)
+
+const SubscribtionForm = () => (
+  <div className='subscribe-wrapper'>
+    <h2 className='subscribe-text'>SUBSCRIBE</h2>
+    <h3 className='subscribe-subtext'>Sign up with your emall address to receive news and updates.</h3>
+    <div>
+      <input className='button' type="text" placeholder='First Name' />
+      <input className='button' type="text" placeholder='Last Name' />
+      <input className='button' type="text" placeholder='Email' />
+    </div>
+    <input type="button" className='button-submit' value="Subscribe" />
+  </div>
+)
 // The App, or the parent or the container component
 const App = () => (
   <div className='app'>
-    <Header />
-    <Main />
-    <Footer />
+    {
+      // <SubscribtionForm />
+      // <Logos />
+      <ColorGenerator />
+      //  <Header />
+      // <Main />
+      // <Footer /> 
+    }
+
   </div>
 )
 
