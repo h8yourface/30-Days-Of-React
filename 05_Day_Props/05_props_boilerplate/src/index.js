@@ -2,6 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import asabenehImage from './images/asabeneh.jpg'
 
+import cssLogo from './images/css_logo.png'
+import reactLogo from './images/react_logo.png'
+import jsLogo from './images/js_logo.png'
+import htmlLogo from './images/html_logo.png'
+
+
 // Fuction to show month date year
 
 const showDate = (time) => {
@@ -111,6 +117,53 @@ const Footer = ({ copyRight }) => (
   </footer>
 )
 
+const Logos = ({ props: { htmlLogo, cssLogo, jsLogo, reactLogo, logosText } }) => (
+  <div>
+    <h4>{logosText}</h4>
+    <div className='logos'>
+      <img className='logo-img' src={htmlLogo} alt="html logo" />
+      <img className='logo-img' src={cssLogo} alt="css logo" />
+      <img className='logo-img' src={jsLogo} alt="js logo" />
+      <img className='logo-img' src={reactLogo} alt="react logo" />
+    </div>
+  </div>
+)
+
+const SubscribtionForm = ({ props: { title, subtitle, FNPlaceholder, LNPlaceholder, EmPlaceholder, btnValue } }) => (
+  <div className='subscribe-wrapper'>
+    <h2 className='subscribe-text'>{title}</h2>
+    <h3 className='subscribe-subtext'>{subtitle}</h3>
+    <div>
+      <input className='button' type="text" placeholder={FNPlaceholder} />
+      <input className='button' type="text" placeholder={LNPlaceholder} />
+      <input className='button' type="text" placeholder={EmPlaceholder} />
+    </div>
+    <input type="button" className='button-submit' value={btnValue} />
+  </div>
+)
+
+
+const HexaColor = ({ hexaColor }) => {
+  const bgColor = hexaColor()
+  const styles = {
+    height: '100px',
+    display: 'flex',
+    backgroundColor: bgColor,
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontFamily: 'Montserrat',
+    margin: '2px auto',
+    borderRadius: '5px',
+    width: '100%',
+  }
+  return (
+    <div style={styles}>
+      <h2>{bgColor}</h2>
+    </div>
+  )
+}
+
 // The App, or the parent or the container component
 // Functional Component
 const App = () => {
@@ -136,16 +189,52 @@ const App = () => {
     alert('Welcome to 30 Days Of React Challenge, 2020')
   }
 
+  const hexaColor = () => {
+    let str = '0123456789abcdef'
+    let color = ''
+    for (let i = 0; i < 6; i++) {
+      let index = Math.floor(Math.random() * str.length)
+      color += str[index]
+    }
+    return '#' + color
+  }
+
+
+  const logosData = {
+    cssLogo: cssLogo,
+    htmlLogo: htmlLogo,
+    reactLogo: reactLogo,
+    jsLogo: jsLogo,
+    logosText: 'Front End Technologies'
+  }
+
+  const subData = {
+    title: 'SUBSCRIBE',
+    subtitle: 'Sign up with your emall address to receive news and updates.',
+    FNPlaceholder: 'First name',
+    LNPlaceholder: 'Last name',
+    EmPlaceholder: 'Email',
+    btnValue: 'Subscribe'
+  }
+
   return (
     <div className='app'>
-      <Header data={data} />
-      <Main
+      {/* <HexaColor hexaColor={hexaColor} />
+      <HexaColor hexaColor={hexaColor} />
+      <HexaColor hexaColor={hexaColor} />
+      <HexaColor hexaColor={hexaColor} />
+      <HexaColor hexaColor={hexaColor} />
+      <HexaColor hexaColor={hexaColor} /> */}
+      {/* <Logos props={logosData} /> */}
+      {/* <SubscribtionForm props={subData} /> */}
+      {/* <Header data={data} /> */}
+      {/* <Main
         user={user}
         techs={techs}
         handleTime={handleTime}
         greetPeople={greetPeople}
-      />
-      <Footer copyRight={date} />
+      /> */}
+      {/* <Footer copyRight={date} /> */}
     </div>
   )
 }
