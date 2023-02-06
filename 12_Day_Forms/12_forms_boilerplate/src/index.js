@@ -1,6 +1,8 @@
 // index.js
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import validator from 'validator'
+import { countriesData } from './data/countries'
 
 const options = [
   {
@@ -28,7 +30,7 @@ const options = [
 // mapping the options to list(array) of JSX options
 
 const selectOptions = options.map(({ value, label }) => (
-  <option value={value}> {label}</option>
+  <option key={label} value={value}> {label}</option>
 ))
 
 class App extends Component {
@@ -53,6 +55,9 @@ class App extends Component {
     touched: {
       firstName: false,
       lastName: false,
+      email: false,
+      tel: false,
+      weight: false
     },
   }
   handleChange = (e) => {
@@ -78,10 +83,16 @@ class App extends Component {
     const { name, value } = e.target
     this.setState({ touched: { ...this.state.touched, [name]: true } })
   }
+
+
   validate = () => {
     // Object to collect error feedback and to display on the form
     const errors = {
       firstName: '',
+      lastName: '',
+      email: '',
+      tel: '',
+      weight: ''
     }
 
     if (
@@ -90,6 +101,28 @@ class App extends Component {
     ) {
       errors.firstName = 'First name must be between 2 and 12'
     }
+    if (
+      (this.state.touched.lastName && this.state.lastName.length < 3) ||
+      (this.state.touched.lastName && this.state.lastName.length > 12)
+    ) {
+      errors.lastName = 'Last name must be between 2 and 12'
+    }
+    if (
+      (this.state.touched.email && !validator.isEmail(this.state.email))
+    ) {
+      errors.email = 'Email validation is failed'
+    }
+    if (
+      (this.state.touched.tel && !validator.isMobilePhone(this.state.tel))
+    ) {
+      errors.tel = 'Phone number validation is failed'
+    }
+    if (
+      (this.state.touched.weight && !validator.isNumeric(this.state.weight))
+    ) {
+      errors.weight = 'Weight is suppose to ba a number'
+    }
+
     return errors
   }
   handleSubmit = (e) => {
@@ -139,7 +172,13 @@ class App extends Component {
     // accessing the state value by destrutcturing the state
     // the noValidate attribute on the form is to stop the HTML5 built-in validation
 
-    const { firstName } = this.validate()
+    const {
+      firstName,
+      lastName,
+      email,
+      tel,
+      weight
+    } = this.validate()
     return (
       <div className='App'>
         <h3>Add Student</h3>
@@ -165,8 +204,11 @@ class App extends Component {
                 name='lastName'
                 value={this.state.lastName}
                 onChange={this.handleChange}
+                onBlur={this.handleBlur}
                 placeholder='Last Name'
-              />
+              />{' '}
+              <br />
+              <small>{lastName}</small>
             </div>
             <div className='form-group'>
               <label htmlFor='email'>Email </label>
@@ -175,8 +217,11 @@ class App extends Component {
                 name='email'
                 value={this.state.email}
                 onChange={this.handleChange}
+                onBlur={this.handleBlur}
                 placeholder='Email'
-              />
+              />{' '}
+              <br />
+              <small>{email}</small>
             </div>
           </div>
 
@@ -187,8 +232,11 @@ class App extends Component {
               name='tel'
               value={this.state.tel}
               onChange={this.handleChange}
+              onBlur={this.handleBlur}
               placeholder='Tel'
-            />
+            />{' '}
+            <br />
+            <small>{tel}</small>
           </div>
 
           <div className='form-group'>
@@ -220,8 +268,11 @@ class App extends Component {
               name='weight'
               value={this.state.weight}
               onChange={this.handleChange}
+              onBlur={this.handleBlur}
               placeholder='Weight in Kg'
-            />
+            />{' '}
+            <br />
+            <small>{weight}</small>
           </div>
           <div>
             <label htmlFor='country'>Country</label> <br />
