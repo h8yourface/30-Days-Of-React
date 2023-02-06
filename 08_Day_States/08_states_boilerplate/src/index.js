@@ -332,7 +332,6 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        {this.state.backgroundColor}
         <Header data={data} />
         <ChooseCountry
           country={this.state.country}
